@@ -1,0 +1,84 @@
+Gitlet Design Document
+----------------------
+
+Classes and Data Structures
+---------------------------
+
+**** Stage ****
+
+1. HashMap<String, String> addedMap: maps the file name to the sha-1 of it.
+2. ArrayList<String> removeArray: Array of file names for marking removal.
+
+**** Commit ****
+
+1. String _message: message
+2. String _id: ID (sha-1)
+3. String _parent1sha1: Parent SHA-1
+4. Date: date of the commit
+
+**** Branch ****
+
+1. String: name of the branch
+2. Commit: head commit of the branch
+
+**** Blob ****
+
+1. HashMap<String, byte[]> blobMap: map for retrieving the blob
+given a SHA-1
+
+**** AllCommits ****
+
+1. HashMap<String, Commit> allCommits: map the sha-1 to the commit
+of it.
+
+**** AllBranches ****
+
+1. HashMap<String, Branch> allBranches: map the sha-1 to all the
+branches.
+
+**** CurrBranchName ****
+
+String name: holds the name of the current branch
+
+**** LongIDShortcut ****
+
+HashMap<String, String> longIDShortMap: holds the map from short
+ID's t0 long IDs.
+
+Algorithms
+----------
+
+**** Main Class ****
+
+1. Init(): Creates a .gitlet repo in the CWD, and it will create
+all of the other folders which the other objects will sit in to
+store information. Stage folder will store the stage object, which
+stores the hashmap and array to mark things for removal, and addding.
+And creates all the other folders for all the other objects. And
+creates objects that will go in them.
+
+2. Add(String FileName): adds to the staging area object the file name and the sha-1 value.
+Also writes the byte[] of the file to the Blob class hashmap, for
+later use when needing to retrieve for other functions. Calls the
+Object Stage's add function which takes care of adding a file to
+its own object. Then after that in Main, the Stage object is written
+back and saved.
+
+3. Commit(String Message, Stage Info): this creates a commit object
+given the staging area info, adds to the all commits instance, and
+marks the commit as the head of the current branch.
+
+4. Branch(String Name, Commit Head): To create a branch with the name
+and with the commit as the head of the new branch that is being
+created. Gets added to the AllBranches object.
+
+Persistence
+-----------
+
+In order to persist, I have multiple different folders that hold the
+different objects, and I add to the objects whenever calling a function.
+To do so, I read the objects when I need them, then when I am done
+adding to them I write them back and "save" them. The different objects
+that get added to are allBranches, Blobs, AllCommits, AllBranches, ect.
+Which are the objects I use to store the different states, and in order
+to retrieve and manipulate the version control tree structure.
