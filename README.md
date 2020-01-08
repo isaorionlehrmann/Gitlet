@@ -1,5 +1,5 @@
 # Gitlet
-My Final project for the UC Berkeley course Data Structures (CS61B)- a version-control system that mimics some of the basic features of the popular system Git.
+My Final project for the UC Berkeley course Data Structures (61B)- a version-control system that mimics some of the basic features of the popular system Git.
 
 A version-control system is essentially a backup system for related collections of files. The main functionality that my Gitlet supports is:
 
