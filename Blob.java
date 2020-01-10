@@ -15,7 +15,6 @@ public class Blob implements Serializable {
     /** Creates a Blob object for one Hashmap. */
     public Blob() {
         blobMap = new HashMap<>();
-        blobMap.put("penis", "penis".getBytes());
     }
 
     /** Get blob Hashmap.
